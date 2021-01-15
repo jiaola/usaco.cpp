@@ -19,9 +19,6 @@ const int MOD = 1e9+7;
 
 struct mi {
     int v;
-    explicit operator int() const {
-        return v;
-    }
     mi(long long _v) : v(_v % MOD) {
         v += (v < 0) * MOD;
     }
@@ -56,28 +53,28 @@ int main() {
         }
         ymap[y].push_back({x, i});
     }
-    for (const pair<int, vector<pair<int, int>>>& p: xmap) {
-        vector<pair<int, int>> v = p.second;
+    for (auto& p: xmap) {
+        vector <pair<int, int>>& v = p.second;
         sort(v.begin(), v.end());
         mi cur = 0;
-        for (int i = 0; i < v.size(); i++) {
+        for (int i = 0; i < v.size(); ++i) {
             cur = cur + (v[i].first - v[0].first);
         }
-        for (int i = 0; i < v.size(); i++) {
+        for (int i = 0; i < v.size(); ++i) {
             if (i > 0) {
                 cur = cur +  (2 * i - v.size()) * (v[i].first - v[i-1].first);
             }
             sum[v[i].second].first = cur;
         }
     }
-    for (const pair<int, vector<pair<int, int>>>& p: ymap) {
-        vector<pair<int, int>> v = p.second;
+    for (auto& p: ymap) {
+        vector<pair<int, int>>& v = p.second;
         sort(v.begin(), v.end());
         mi cur = 0;
-        for (int i = 0; i < v.size(); i++) {
+        for (int i = 0; i < v.size(); ++i) {
             cur = cur + (v[i].first - v[0].first);
         }
-        for (int i = 0; i < v.size(); i++) {
+        for (int i = 0; i < v.size(); ++i) {
             if (i > 0) {
                 cur = cur +  (2 * i - v.size()) * (v[i].first - v[i-1].first);
             }
