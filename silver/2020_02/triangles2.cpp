@@ -53,7 +53,7 @@ int main() {
         }
         ymap[y].push_back({x, i});
     }
-    for (auto& p: xmap) {
+    for (pair<const int, vector<pair<int, int>, allocator<pair<int, int>>>> p: xmap) {
         vector <pair<int, int>>& v = p.second;
         sort(v.begin(), v.end());
         mi cur = 0;

@@ -4,9 +4,6 @@
 #include <vector>
 using namespace std;
 
-// Copied from the solution for http://www.usaco.org/index.php?page=viewproblem2&cpid=1015
-// Made it more readable.
-
 void setIO(string name = "") {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
@@ -20,9 +17,6 @@ const int MOD = 1e9+7;
 
 struct mi {
     int v;
-    explicit operator int() const {
-        return v;
-    }
     mi(long long _v) : v(_v % MOD) {
         v += (v < 0) * MOD;
     }
