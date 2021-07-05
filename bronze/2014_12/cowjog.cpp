@@ -15,21 +15,21 @@ void setIO(string name = "") {
 
 int main() {
     setIO("cowjog");
-    int N;
-    cin >> N;
-    vector<pair<int, int>> pos;
-    for (int i = 0; i < N; ++i) {
+    int n;
+    cin >> n;
+    vector<pair<int, int>> pos(n);
+    for (int i = 0; i < n; ++i) {
         int x, s;
         cin >> x >> s;
-        pos.push_back(pair<int, int>(x, s));
+        pos[i] = pair<int, int>(x, s);
     }
-    sort(begin(pos), end(pos));
-    int s = pos[N-1].second;
+    sort(pos.begin(), pos.end());
+    int s = pos[n-1].second;
     int ans = 1;
-    for (int i = N-2; i >= 0; --i) {
-        if (pos[i].second <= s) {
+    for (auto it = pos.rbegin()+1; it != pos.rend(); it++) {
+        if (it->second <= s) {
             ans++;
-            s = pos[i].second;
+            s = it->second;
         }
     }
     cout << ans << endl;

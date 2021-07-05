@@ -29,7 +29,7 @@ mi operator - (mi a, mi b) { return mi(a.v-b.v); }
 mi operator * (mi a, mi b) { return mi((long long)a.v*b.v); }
 
 int N;
-vector<pair<int, int>> vect;
+vector<pair<int, int>> points;
 unordered_map<int, vector<pair<int, int>>> xmap;
 unordered_map<int, vector<pair<int, int>>> ymap;
 pair<mi, mi> sum[100000];
@@ -38,12 +38,12 @@ pair<mi, mi> sum[100000];
 int main() {
     setIO("triangles");
     cin >> N;
-    vect.resize(N);
+    points.resize(N);
     for (int i = 0; i < N; ++i) {
         int x, y;
         cin >> x >> y;
-        vect[i].first = x;
-        vect[i].second = y;
+        points[i].first = x;
+        points[i].second = y;
         if (xmap.find(x) == xmap.end()) {
             xmap[x] = vector<pair<int, int>>();
         }

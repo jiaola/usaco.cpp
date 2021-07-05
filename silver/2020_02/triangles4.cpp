@@ -27,7 +27,8 @@ mi operator - (mi a, mi b) { return mi(a.v-b.v); }
 mi operator * (mi a, mi b) { return mi((long long)a.v*b.v); }
 
 int N;
-vector<pair<int, int>> points;
+
+pair<int, int> * pts;
 vector<pair<int, int>> todo[20001];
 pair<mi, mi> sum[100000];
 
@@ -58,22 +59,22 @@ void check(bool first) {
 int main() {
     setIO("triangles");
     cin >> N;
-    points.resize(N);
+    pts = new pair<int, int> [N];
     for (int i = 0; i < N; ++i) {
-        cin >> points[i].first >> points[i].second;
+        cin >> pts[i].first >> pts[i].second;
     }
     for (int i = 0; i < 20001; ++i) {
         todo[i].clear();
     }
     for (int i = 0; i < N; ++i) {
-        todo[points[i].first + 10000].push_back({points[i].second, i});
+        todo[pts[i].first + 10000].push_back({pts[i].second, i});
     }
     check(true);
     for (int i = 0; i < 20001; ++i) {
         todo[i].clear();
     }
     for (int i = 0; i < N; ++i) {
-        todo[points[i].second + 10000].push_back({points[i].first, i});
+        todo[pts[i].second + 10000].push_back({pts[i].first, i});
     }
     check(false);
     mi ans = 0;
@@ -81,5 +82,6 @@ int main() {
         ans = ans + sum[i].first * sum[i].second;
     }
     cout << ans.v << endl;
+    delete[] pts;
     return 0;
 }
