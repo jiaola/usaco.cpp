@@ -41,7 +41,7 @@ int main() {
     }
     long long ans = 0;
     for (int i = 0; i < N; ++i) {
-        for (int j = i; j < N; ++j) {
+        for (int j = i; j < N; ++j) {  // when i == j, it's a cell with only one cow
             pair<int, int> p1 = points[i];
             pair<int, int> p2 = points[j];
             int x1 = min(p1.first, p2.first);
