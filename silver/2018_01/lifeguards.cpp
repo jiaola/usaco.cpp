@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cstdio>
+#include <set>
 using namespace std;
 
 void setIO(string name = "") {
@@ -12,30 +13,49 @@ void setIO(string name = "") {
     }
 }
 
+struct Timestamp {
+    int id;
+    int time;;
+    bool starting;
+    bool operator < (const Timestamp& y) {
+        return time < y.time;
+    }
+};
+
 int main() {
     setIO("lifeguards");
     int N;
     cin >> N;
-    int lifeguards[N][2];
+    Timestamp ts[2*N];
+    int single_time[N];
+    int total = 0;
     for (int i = 0; i < N; ++i) {
-        cin >> lifeguards[i][0] >> lifeguards[i][1];
+        single_time[i] = 0;
+        int t1, t2;
+        cin >> t1 >> t2;
+        ts[2*i]= {i, t1, true};
+        ts[2*i+1] = {i, t2, false};
     }
-    int m = 0, m_i = 0;
-    for (int i =0; i < N; ++i) {
-        m_i = 0;
-        for (int k = 0; k < 1000; ++k) {
-            for (int j = 0; j < N; ++j) {
-                if (i == j) {
-                    continue;
-                }
-                if (lifeguards[j][0] <= k && lifeguards[j][1] > k) {
-                    m_i++;
-                    break;
-                }
-            }
+    sort(ts, ts+2*N);
+    set<int> on_duty;
+    int prev = 0;
+    for (int i = 0; i < 2 * N; ++i) {
+        Timestamp t = ts[i];
+        if (on_duty.size() > 0) {
+            total += t.time - prev;
         }
-        m = max(m, m_i);
+        if (on_duty.size() == 1) {
+            int id = *on_duty.begin();
+            single_time[id] += t.time - prev;
+        }
+        if (t.starting) {
+            on_duty.insert(t.id);
+        } else {
+            on_duty.erase(t.id);
+        }
+        prev = t.time;
     }
-    cout << m << endl;
+    int m = *min_element(single_time, single_time + N);
+    cout << total - m << "\n";
     return 0;
 }
