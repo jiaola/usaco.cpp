@@ -1,3 +1,11 @@
+# ignore all
+* 
+
+# unignore all files with extensions
+!*.*
+
+# uignore all folders
+!*/
 
 # Created by https://www.toptal.com/developers/gitignore/api/c++,clion,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=c++,clion,macos
