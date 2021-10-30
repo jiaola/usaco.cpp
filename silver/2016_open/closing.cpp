@@ -56,9 +56,7 @@ int main() {
     for (int i = 0; i < N-1; ++i) {
         int u; cin >> u;
         in_graph[u-1] = 0;
-        for (int j = 0; j < N; ++j) {
-            visited[j] = 0;
-        }
+        fill(visited, visited+N, 0);
         if (solve() == N-i-1) {
             cout << "YES\n";
         } else {
